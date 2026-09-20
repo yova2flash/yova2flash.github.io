@@ -1,10 +1,9 @@
 CACHE MANIFEST 
-# rev 20260920-buttons-ready
+# rev 20260920-yova-tiktok
 
 CACHE: 
 style.css
-logo_raw.png
-flag.png
+logo.jpeg
 goldhen_2.4b18.10.bin
 index.html
 505/exploit.js
