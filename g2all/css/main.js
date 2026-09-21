@@ -109,6 +109,7 @@ async function doJb() {
       const bin_buf = await bin_rsp.arrayBuffer();
       const bin_u8 = new Uint8Array(bin_buf);
       load_bin(bin_u8);
+      setTimeout(function(){var d=document.createElement('div');d.style.cssText='position:fixed;top:20px;left:20px;z-index:9999;background:rgba(30,15,0,0.92);color:#ff8c00;font-family:monospace;font-size:15px;font-weight:bold;padding:12px 20px;border:2px solid #ff8c00;border-radius:8px;box-shadow:0 0 18px #ff8c0088;pointer-events:none;';d.textContent='\uD83C\uDFAE Jailbreak by YOVA FLASH';document.body.appendChild(d);setTimeout(function(){d.remove();},5000);},4000);
     }
 
     msgs.innerHTML = "GoldHEN v2.4b18.10 Loaded ...";
