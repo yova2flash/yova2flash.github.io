@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>YOVA FLASH - PS4 [5.05] 7.00 - 13.00 FW GoldHEN Host</title>
-<link rel="stylesheet" href="style.css?v=orange">
+<link rel="stylesheet" href="style.css">
 <style>
 :root {
   --bg-main: #0a0b0e;
@@ -138,12 +138,87 @@ html, body {
   box-shadow: 0 0 28px rgba(0, 220, 255, 0.95) !important;
   transform: translateY(-2px);
 }
+
+#brand {
+  text-align: center;
+  padding: 12px 16px;
+  background: var(--bg-header);
+  border-bottom: 2px solid var(--accent-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.brand-logo {
+  width: 75px !important;
+  height: 75px !important;
+  border-radius: 50%;
+  border: 2.5px solid var(--accent-color);
+  box-shadow: 0 0 18px var(--accent-glow);
+  object-fit: cover;
+  vertical-align: middle;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(255, 122, 0, 0.95);
+}
+
+.btn-tiktok {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 122, 0, 0.15);
+  color: #ff9426;
+  border: 1.5px solid rgba(255, 122, 0, 0.6);
+  border-radius: 22px;
+  padding: 7px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+.btn-tiktok:hover {
+  background: #ff7a00;
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 0 20px rgba(255, 122, 0, 0.9);
+  transform: translateY(-2px);
+}
+
+.btn-tiktok svg {
+  vertical-align: middle;
+}
+
+#brand b {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--text-white);
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
 </style>
 </head>
 <body>
 <div id="brand">
   <a href="https://www.tiktok.com/@yova2flash" target="_blank" class="brand-logo-link" title="YOVA FLASH TikTok">
-    <img src="logo.jpeg" alt="YOVA FLASH Logo" class="brand-logo">
+    <img src="logo.jpeg" alt="YOVA FLASH Logo" class="brand-logo" width="75" height="75">
   </a>
   <b>YOVA FLASH</b>
   <a href="https://www.tiktok.com/@yova2flash" target="_blank" class="btn-tiktok">
