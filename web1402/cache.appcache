@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v14.02-1794666184484
+# v-2.4b18.14-20261126-r2-yova2flash-web1402
 
 CACHE:
 index.html
@@ -10,8 +10,11 @@ core.js
 mem.js
 int64.js
 ps4_offsets.js
-src/kpatches/1400.bin
-goldhen_v2.4b18.14.bin
+rpc_worker.js
+goldhen_2.4b18.14.bin
+slopkit/patches/1352.bin
+slopkit/patches/1400.bin
+slopkit/patches/1402.bin
 logo.jpeg
 
 NETWORK:

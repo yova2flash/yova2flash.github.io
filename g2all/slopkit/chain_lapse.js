@@ -36,7 +36,7 @@ const lines = [];
 function hostOk() {
     var m = document.getElementById("msgs");
     if (m) {
-        m.innerHTML = "GoldHEN v2.4b18.10 Loaded ...";
+        m.innerHTML = "GoldHEN v2.4b18.14 Loaded ...";
     }
 }
 
@@ -277,7 +277,7 @@ function makeRpc(worker) {
 
         let payload = null;
         try {
-            const prsp = await fetch("goldhen_2.4b18.10.bin");
+            const prsp = await fetch("goldhen_2.4b18.14.bin");
             if (prsp.ok) payload = new Uint8Array(await prsp.arrayBuffer());
         } catch (e) {
             mark("PAYLOAD-FETCH-FAILED", (e && e.message) ? e.message : String(e));
@@ -3542,7 +3542,7 @@ function makeRpc(worker) {
                                                     + "wrote back a thread handle"
                                                     : "returned " + rc);
                                             payloadRunning = launched;
-                                            if (launched) { setTimeout(function(){var d=document.createElement('div');d.style.cssText='position:fixed;top:20px;left:20px;z-index:9999;background:rgba(30,15,0,0.92);color:#ff8c00;font-family:monospace;font-size:15px;font-weight:bold;padding:12px 20px;border:2px solid #ff8c00;border-radius:8px;box-shadow:0 0 18px #ff8c0088;pointer-events:none;';d.textContent='\uD83C\uDFAE Jailbreak by YOVA FLASH';document.body.appendChild(d);setTimeout(function(){d.remove();},5000);},4000);
+                                            if (launched) {
                                                 mark("PAYLOAD-RUNNING", "bytes="
                                                     + payload.length + " entry="
                                                     + entry);

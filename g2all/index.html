@@ -1,218 +1,240 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YOVA FLASH - PS4 [5.05] 7.00 - 13.00 FW GoldHEN Host</title>
+<title>PS4 [5.05] 7.00 - 14.02 FW GoldHEN Host by YOVA FLASH</title>
 <link rel="stylesheet" href="style.css">
 <style>
-:root {
-  --bg-main: #0a0b0e;
-  --bg-header: #12141a;
-  --bg-card: rgba(18, 20, 26, 0.92);
-  --border-color: rgba(255, 122, 0, 0.35);
-  --accent-color: #ff7a00;
-  --accent-glow: rgba(255, 122, 0, 0.45);
-  --text-white: #ffffff;
-  --text-muted: #d1d5db;
-  --text-dim: #9ca3af;
-  --status-ok: #ff9426;
-  --status-warn: #ffb84d;
-  --status-bad: #ff4d4d;
-}
+  :root {
+    --bg-main: #0a0b0e;
+    --bg-header: #12141a;
+    --bg-card: rgba(18, 20, 26, 0.94);
+    --border-color: rgba(255, 122, 0, 0.40);
+    --accent-color: #ff7a00;
+    --accent-light: #ff9426;
+    --accent-glow: rgba(255, 122, 0, 0.50);
+    --text-white: #ffffff;
+    --text-muted: #cbd5e1;
+    --text-dim: #94a3b8;
+    --status-ok: #ff9426;
+    --status-warn: #ffb84d;
+    --status-bad: #ff4d4d;
+  }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background: var(--bg-main) !important;
-  background-image:
-    radial-gradient(circle at 50% 0%, rgba(255, 122, 0, 0.12) 0%, transparent 55%),
-    radial-gradient(circle at 10% 90%, rgba(255, 122, 0, 0.06) 0%, transparent 45%) !important;
-  color: var(--text-white);
-  font: 15px/1.45 "Segoe UI", system-ui, -apple-system, sans-serif;
-  text-align: center;
-  -webkit-font-smoothing: antialiased;
-}
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: var(--bg-main) !important;
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(255, 122, 0, 0.50) 0%, transparent 55%),
+      radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.04) 0%, transparent 45%) !important;
+    color: var(--text-white);
+    font: 15px/1.45 "Segoe UI", system-ui, -apple-system, sans-serif;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+  }
 
+  #brand {
+    text-align: center;
+    padding: 10px 16px;
+    background: var(--bg-header);
+    border-bottom: 2px solid var(--accent-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7), 0 0 16px var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
 
+  .brand-side {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-.main-title {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--text-white);
-  margin: 20px 10px 8px;
-  letter-spacing: 0.03em;
-}
+  .brand-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
 
-.sub-title {
-  font-size: 14px;
-  color: var(--accent-color) !important;
-  font-weight: 700;
-  margin-bottom: 20px;
-  letter-spacing: 0.05em;
-}
+  .brand-logo {
+    width: 75px !important;
+    height: 75px !important;
+    border-radius: 50%;
+    border: 2.5px solid var(--accent-color);
+    box-shadow: 0 0 18px var(--accent-glow);
+    object-fit: cover;
+    vertical-align: middle;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
 
-#msgs {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--status-warn) !important;
-  line-height: 1.5;
-  margin-bottom: 16px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  min-height: 26px;
-}
+  .brand-logo:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px var(--accent-glow);
+  }
 
-.btn-menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  max-width: 760px;
-  margin: 10px auto 30px;
-}
+  .btn-tiktok {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--accent-light);
+    border: 1.5px solid var(--accent-color);
+    border-radius: 22px;
+    padding: 7px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  }
 
-.btn {
-  background: #12141c;
-  color: #ffffff;
-  width: 227px;
-  height: 48px;
-  font-size: 18px;
-  font-weight: 700;
-  border: 1.5px solid rgba(255, 122, 0, 0.4) !important;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  font-family: inherit;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
+  .btn-tiktok:hover {
+    background: var(--accent-color);
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 0 20px var(--accent-glow);
+    transform: translateY(-2px);
+  }
 
-.btn:hover, .btn:focus {
-  background: #ff7a00 !important;
-  color: #000000 !important;
-  border-color: #ff9426 !important;
-  box-shadow: 0 0 20px var(--accent-glow) !important;
-  transform: translateY(-2px);
-}
+  .btn-tiktok svg { vertical-align: middle; }
 
-.btn.btn-multi {
-  background: #ff7a00 !important;
-  color: #ffffff !important;
-  border: 1.5px solid #ff9426 !important;
-  box-shadow: 0 0 16px var(--accent-glow) !important;
-  font-weight: 800;
-}
+  #brand b {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: var(--text-white);
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
 
-.btn.btn-multi:hover, .btn.btn-multi:focus {
-  background: #ffa033 !important;
-  color: #000000 !important;
-  box-shadow: 0 0 24px var(--accent-glow) !important;
-  transform: translateY(-2px);
-}
+  .main-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-white);
+    margin: 22px 10px 6px;
+    letter-spacing: 0.03em;
+    text-align: center;
+  }
 
-/* BLUE BUTTON: ⚡ 13.02 - 13.52 Host */
-.btn.btn-host {
-  background: linear-gradient(135deg, #0066ff 0%, #00c8ff 100%) !important;
-  color: #ffffff !important;
-  border: 1.5px solid #00e5ff !important;
-  box-shadow: 0 0 20px rgba(0, 170, 255, 0.7) !important;
-  font-weight: 800;
-}
+  .sub-title {
+    font-size: 14px;
+    color: var(--accent-color);
+    font-weight: 700;
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
 
-.btn.btn-host:hover, .btn.btn-host:focus {
-  background: linear-gradient(135deg, #0088ff 0%, #33e0ff 100%) !important;
-  color: #000000 !important;
-  border-color: #ffffff !important;
-  box-shadow: 0 0 28px rgba(0, 220, 255, 0.95) !important;
-  transform: translateY(-2px);
-}
+  #msgs {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent-light);
+    margin: 18px auto 14px;
+    letter-spacing: 0.4px;
+    min-height: 36px;
+    text-shadow: 0 0 15px var(--accent-glow);
+    padding: 0 12px;
+  }
 
-#brand {
-  text-align: center;
-  padding: 12px 16px;
-  background: var(--bg-header);
-  border-bottom: 2px solid var(--accent-color);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--accent-glow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 24px;
-}
+  .cache-bar {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
 
-.brand-logo-link {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-}
+  .btn-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 820px;
+    margin: 15px auto 30px;
+    padding: 0 12px;
+  }
 
-.brand-logo {
-  width: 75px !important;
-  height: 75px !important;
-  border-radius: 50%;
-  border: 2.5px solid var(--accent-color);
-  box-shadow: 0 0 18px var(--accent-glow);
-  object-fit: cover;
-  vertical-align: middle;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
+  .btn {
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    width: 236px;
+    height: 48px;
+    font-size: 16px;
+    font-weight: 700;
+    border: 1.5px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-family: inherit;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
 
-.brand-logo:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 25px rgba(255, 122, 0, 0.95);
-}
+  .btn:hover, .btn:focus {
+    background: var(--accent-color);
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 0 24px var(--accent-glow);
+    transform: translateY(-2px);
+  }
 
-.btn-tiktok {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: rgba(255, 122, 0, 0.15);
-  color: #ff9426;
-  border: 1.5px solid rgba(255, 122, 0, 0.6);
-  border-radius: 22px;
-  padding: 7px 16px;
-  font-size: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  letter-spacing: 0.03em;
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
-}
+  .btn.btn-host {
+    background: linear-gradient(135deg, #ff7a00 0%, #e65c00 100%) !important;
+    color: #ffffff !important;
+    border: 1.5px solid #ffa033 !important;
+    box-shadow: 0 0 18px var(--accent-glow) !important;
+    font-weight: 800;
+  }
 
-.btn-tiktok:hover {
-  background: #ff7a00;
-  color: #000000;
-  border-color: #ffffff;
-  box-shadow: 0 0 20px rgba(255, 122, 0, 0.9);
-  transform: translateY(-2px);
-}
+  .btn.btn-host:hover, .btn.btn-host:focus {
+    background: linear-gradient(135deg, #ff9426 0%, #ff7a00 100%) !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 0 28px var(--accent-glow) !important;
+    transform: translateY(-2px);
+  }
 
-.btn-tiktok svg {
-  vertical-align: middle;
-}
+  .credits {
+    margin: 10px auto 30px;
+    font-size: 13px;
+    color: var(--text-dim);
+    padding: 0 12px;
+  }
 
-#brand b {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  color: var(--text-white);
-  text-transform: uppercase;
-  vertical-align: middle;
-}
+  .credits b {
+    color: var(--accent-light);
+  }
 
+  #ps-notify {
+    display: none;
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 999999;
+    background: var(--bg-card);
+    border: 2px solid var(--accent-color);
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: 0 0 25px var(--accent-glow), 0 8px 30px rgba(0, 0, 0, 0.9);
+    align-items: center;
+    gap: 14px;
+    animation: popSlideIn 0.5s ease-out forwards;
+  }
+
+  @keyframes popSlideIn {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
 </style>
 </head>
 <body>
@@ -227,22 +249,33 @@ html, body {
   </a>
 </div>
 
-<h1 class="main-title">PS4 [5.05] 7.00 - 13.00 FW GoldHEN Host</h1>
-<div class="sub-title">YOVA FLASH Multi-Firmware Host</div>
+<h1 class="main-title">PS4 [5.05] 7.00 - 14.02 FW GoldHEN Host by YOVA FLASH</h1>
+<div class="sub-title">Auto Cache &amp; Auto Exploit Selection (GoldHEN v2.4b18.14)</div>
 
-<div style="text-align:center; margin: 25px auto 40px;">
-  <h1 id="msgs" style="font-size: 18px; color: var(--status-warn); font-weight: 800; margin-bottom: 16px; letter-spacing: 0.05em; text-transform: uppercase; min-height: 26px;">
-    Select Your Firmware
-  </h1>
+<div style="text-align:center; margin: 12px auto 10px;">
+  <h1 id="msgs">Detecting Firmware...</h1>
+  <div id="cache-info" class="cache-bar"></div>
   <div class="btn-menu">
-    <button type="button" class="btn btn-multi" onclick="autoLaunch()" onmouseover="setMsg('PS4 GoldHEN Auto-Exploit for 5.05 and 7.00 to 13.00 FW')" onmouseout="resetMsg()">GoldHEN Auto Exploit</button>
-    <button type="button" class="btn" onclick="launchPayload(505)" onmouseover="setMsg('PS4 5.05 / 5.07 FW GoldHEN Host')" onmouseout="resetMsg()">5.05 / 5.07 FW</button>
-    <button type="button" class="btn" onclick="launchPayload(700)" onmouseover="setMsg('PS4 7.00 - 8.52 FW GoldHEN Host')" onmouseout="resetMsg()">7.00 - 8.52 FW</button>
-    <button type="button" class="btn" onclick="launchPayload(900)" onmouseover="setMsg('PS4 9.00 - 9.60 FW GoldHEN Host (psfree)')" onmouseout="resetMsg()">9.00 - 9.60 FW</button>
-    <button type="button" class="btn" onclick="launchPayload(1000)" onmouseover="setMsg('PS4 10.00 - 11.02 FW GoldHEN Host (WebKit)')" onmouseout="resetMsg()">10.00 - 11.02 FW</button>
-    <button type="button" class="btn" onclick="launchPayload(1150)" onmouseover="setMsg('PS4 11.50 - 12.02 FW GoldHEN Host (slopkit)')" onmouseout="resetMsg()">11.50 - 12.02 FW</button>
-    <button type="button" class="btn" onclick="launchPayload(1250)" onmouseover="setMsg('PS4 12.50 - 13.00 FW GoldHEN Host (slopkit)')" onmouseout="resetMsg()">12.50 - 13.00 FW</button>
-    <a href="../index.html" class="btn btn-host" onmouseover="setMsg('Switch to 13.02 - 13.52 Exploit Host')" onmouseout="resetMsg()">⚡ 13.02 - 13.52 Host</a>
+    <button type="button" class="btn btn-host" onclick="autoLaunch()">⚡ Auto Exploit (Detected FW)</button>
+    <button type="button" class="btn" onclick="launchPayload('5.05')">5.05 / 5.07 FW</button>
+    <button type="button" class="btn" onclick="launchPayload('7.00')">7.00 - 8.52 FW</button>
+    <button type="button" class="btn" onclick="launchPayload('9.00')">9.00 - 9.60 FW</button>
+    <button type="button" class="btn" onclick="launchPayload('10.00')">10.00 - 11.02 FW</button>
+    <button type="button" class="btn" onclick="launchPayload('11.50')">11.50 - 11.52 FW</button>
+    <button type="button" class="btn" onclick="launchPayload('12.00')">12.00 - 13.52 FW</button>
+    <button type="button" class="btn btn-host" onclick="launchPayload('14.00')">🔥 14.00 FW</button>
+    <button type="button" class="btn btn-host" onclick="launchPayload('14.02')">🔥 14.02 FW</button>
+    <button type="button" class="btn" onclick="installCacheForFw()">💾 Install / Update Cache</button>
+    <a href="../index.html" class="btn">🏠 Main Menu</a>
+  </div>
+  <div class="credits">Hosted by <b>YOVA FLASH</b> &middot; Thanks to _AlAzif, ChendoChap, Kameleonre_, SiSTR0, Abc</div>
+</div>
+
+<div id="ps-notify">
+  <img src="logo.jpeg" style="width: 44px; height: 44px; border-radius: 50%; border: 2px solid #ff7a00; object-fit: cover;">
+  <div>
+    <div style="font-size: 11px; color: #ff9426; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">GoldHEN Notification</div>
+    <div style="font-size: 15px; color: #ffffff; font-weight: 800; letter-spacing: 0.5px;">⚡ Jailbreak by YOVA FLASH</div>
   </div>
 </div>
 
@@ -252,135 +285,145 @@ var match = uaFull.match(/PlayStation 4[ /]([\d.]+)/i);
 var isPS4 = match !== null;
 var fwVersion = isPS4 ? match[1] : "Unknown";
 var fwNum = parseFloat(fwVersion);
+var msgs = document.getElementById("msgs");
+var cacheInfo = document.getElementById("cache-info");
+var notifyShown = false;
+
+function showCustomNotification() {
+  if (notifyShown) return;
+  notifyShown = true;
+  var n = document.getElementById("ps-notify");
+  if (!n) return;
+  n.style.display = "flex";
+  setTimeout(function () {
+    n.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+    n.style.opacity = "0";
+    n.style.transform = "translateY(-20px)";
+    setTimeout(function () { try { n.remove(); } catch (e) {} }, 800);
+  }, 7000);
+}
+window.showCustomNotification = showCustomNotification;
+window.jailbreakSuccess = showCustomNotification;
+
+// Watch #msgs so 5.05 / 7.00 / 9.00 / 10.00-11.02 / 11.50-14.02 all trigger notification on GoldHEN load
+if (typeof MutationObserver !== "undefined" && msgs) {
+  new MutationObserver(function () {
+    var t = msgs.textContent || "";
+    if (/Loaded|Already Loaded/i.test(t)) showCustomNotification();
+  }).observe(msgs, { childList: true, characterData: true, subtree: true });
+}
 
 function onScriptError() {
-    var m = document.getElementById("msgs");
-    if (m) m.innerHTML = "Content not Found! - Clear Browser Data and Re-Install Cache ...";
+  msgs.innerHTML = "Content not Found! - Clear Browser Data and Re-Install Cache ...";
 }
 
-function setMsg(txt) {
-    var m = document.getElementById("msgs");
-    if (m) m.innerHTML = txt;
+function cachePageForFw(fn) {
+  if (fn == 5.05 || fn == 5.07) return "cache505.html";
+  if (fn >= 7.00 && fn <= 8.52) return "cache700.html";
+  if (fn >= 9.00 && fn <= 9.60) return "cache900.html";
+  if (fn >= 10.00 && fn <= 11.02) return "cachecss.html";
+  if (fn >= 11.50 && fn <= 14.02) return "cacheslopkit.html";
+  return null;
 }
 
-function resetMsg() {
-    var m = document.getElementById("msgs");
-    if (!m) return;
-    if (isPS4) {
-        m.innerHTML = "PS4 Firmware <b>" + fwVersion + "</b> Detected &middot; Select Your Firmware";
-    } else {
-        m.innerHTML = "Select Your Firmware";
-    }
-}
-
-function getCacheTarget(fw) {
-    if (fw == 505) return "cache505.html";
-    if (fw == 700) return "cache700.html";
-    if (fw == 900) return "cache900.html";
-    if (fw == 1000) return "cachecss.html";
-    return "cacheslopkit.html";
-}
-
-function launchPayload(fw) {
-    var cachePage = getCacheTarget(fw);
-    var ac = window.applicationCache;
-    var isCached = (ac && ac.status !== 0 && ac.status !== undefined);
-
-    // On desktop PC / testing environment: navigate to the cache installer page
-    if (!isPS4) {
-        setMsg("Opening Cache Installer for FW " + (fw == 1000 ? "10.00 - 11.02" : fw == 1150 ? "11.50 - 12.02" : fw == 1250 ? "12.50 - 13.00" : fw == 900 ? "9.00 - 9.60" : fw == 700 ? "7.00 - 8.52" : "5.05 / 5.07") + "...");
-        setTimeout(function () {
-            window.location.href = cachePage;
-        }, 200);
-        return;
-    }
-
-    // On PS4 uncached: install offline cache first
-    if (!isCached) {
-        setMsg("Redirecting to Cache Installation for FW " + fw + "... Please Wait");
-        setTimeout(function () {
-            window.location.replace(cachePage);
-        }, 200);
-        return;
-    }
-
-    // On PS4 cached: launch payload
-    setMsg("Loading GoldHEN v2.4b18.10... Please Wait");
-
-    try {
-        if (fw == 505) {
-            var script = document.createElement('script');
-            script.src = "505/exploit.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        } else if (fw == 700) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "700/alert.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        } else if (fw == 900) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "900/alert.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        } else if (fw == 1000) {
-            var script = document.createElement('script');
-            script.src = "css/main.js";
-            script.onerror = onScriptError;
-            script.onload = function () {
-                setTimeout(function () {
-                    if (typeof doJb === 'function') doJb();
-                }, 500);
-            };
-            document.head.appendChild(script);
-        } else if (fw == 1150) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "slopkit/chain_lapse.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        } else if (fw == 1250) {
-            var script = document.createElement('script');
-            script.type = 'module';
-            script.src = "slopkit/chain_poops.js";
-            script.onerror = onScriptError;
-            document.head.appendChild(script);
-        }
-    } catch (err) {
-        setMsg("Error launching payload: " + (err && err.message ? err.message : err));
-    }
+function executeForFw(fn) {
+  if (fn == 5.05 || fn == 5.07) {
+    msgs.innerHTML = "Loading GoldHEN v2.4b18.14 (5.05 / 5.07)... Please Wait";
+    var script = document.createElement("script");
+    script.src = "505/exploit.js";
+    script.onerror = onScriptError;
+    document.head.appendChild(script);
+  } else if (fn >= 7.00 && fn <= 8.52) {
+    msgs.innerHTML = "Loading GoldHEN v2.4b18.14 (7.00 - 8.52)... Please Wait";
+    var script = document.createElement("script");
+    script.type = "module";
+    script.src = "700/alert.js";
+    script.onerror = onScriptError;
+    document.head.appendChild(script);
+  } else if (fn >= 9.00 && fn <= 9.60) {
+    msgs.innerHTML = "Loading GoldHEN v2.4b18.14 (9.00 - 9.60)... Please Wait";
+    var script = document.createElement("script");
+    script.type = "module";
+    script.src = "900/alert.js";
+    script.onerror = onScriptError;
+    document.head.appendChild(script);
+  } else if (fn >= 10.00 && fn <= 11.02) {
+    msgs.innerHTML = "Loading GoldHEN v2.4b18.14 (10.00 - 11.02)... Please Wait";
+    var script = document.createElement("script");
+    script.src = "css/main.js";
+    script.onerror = onScriptError;
+    script.onload = function () {
+      setTimeout(function () { if (typeof doJb === "function") doJb(); }, 500);
+    };
+    document.head.appendChild(script);
+  } else if (fn == 11.50 || fn == 11.52) {
+    msgs.innerHTML = "Loading GoldHEN v2.4b18.14 (11.50 - 11.52)... Please Wait";
+    var script = document.createElement("script");
+    script.type = "module";
+    script.src = "slopkit/chain_lapse.js";
+    script.onerror = onScriptError;
+    document.head.appendChild(script);
+  } else if (fn >= 12.00 && fn <= 14.02) {
+    msgs.innerHTML = "Loading GoldHEN v2.4b18.14 (" + (fn >= 14.02 ? "14.02" : fn >= 14.00 ? "14.00" : "12.00-13.52") + ")... Please Wait";
+    var script = document.createElement("script");
+    script.type = "module";
+    script.src = "slopkit/jb.js";
+    script.onerror = onScriptError;
+    document.head.appendChild(script);
+  } else {
+    msgs.innerHTML = 'Unsupported Firmware: <span style="color: #ff4d4d;">' + fwVersion + '</span>';
+  }
 }
 
 function autoLaunch() {
-    if (!isPS4) {
-        setMsg("Auto-Detection requires PS4 console &middot; Select your firmware manually below");
-        return;
-    }
-    if (fwNum == 5.05 || fwNum == 5.07) {
-        launchPayload(505);
-    } else if (fwNum >= 7.00 && fwNum <= 8.52) {
-        launchPayload(700);
-    } else if (fwNum >= 9.00 && fwNum <= 9.60) {
-        launchPayload(900);
-    } else if (fwNum >= 10.00 && fwNum <= 11.02) {
-        launchPayload(1000);
-    } else if (fwNum >= 11.50 && fwNum <= 12.02) {
-        launchPayload(1150);
-    } else if (fwNum >= 12.50 && fwNum <= 13.00) {
-        launchPayload(1250);
-    } else if (fwNum >= 13.02 && fwNum <= 13.52) {
-        setMsg("PS4 FW " + fwVersion + " Detected &middot; Redirecting to 13.02 - 13.52 Host...");
-        setTimeout(function () {
-            window.location.href = "../index.html";
-        }, 600);
-    } else {
-        setMsg('Unsupported Firmware: <span style="color: #ff4d4d;">' + fwVersion + '</span> &middot; Select an option below');
-    }
+  if (isPS4 && !isNaN(fwNum)) {
+    executeForFw(fwNum);
+  } else {
+    msgs.innerHTML = "Only for PS4 with Firmware 5.05 and 7.00 to 14.02";
+  }
 }
 
-resetMsg();
+function launchPayload(fwStr) {
+  var n = parseFloat(fwStr);
+  if (n >= 100) n = n / 100;
+  executeForFw(n);
+}
+
+function installCacheForFw() {
+  var cp = cachePageForFw(fwNum);
+  if (!cp) cp = "cacheslopkit.html";
+  window.location.replace(cp);
+}
+
+if (!isPS4) {
+  document.addEventListener("DOMContentLoaded", function () {
+    msgs.innerHTML = "Only for PS4 with Firmware 5.05 and 7.00 to 14.02";
+    if (cacheInfo) cacheInfo.textContent = "Detected User-Agent: non-PS4 browser (select a button to test)";
+  });
+} else {
+  var ac = window.applicationCache;
+  if (ac && ac.status == 0) {
+    var cp = cachePageForFw(fwNum);
+    if (cp) {
+      window.location.replace(cp);
+    } else {
+      document.addEventListener("DOMContentLoaded", function () {
+        msgs.innerHTML = 'Unsupported Firmware: <span style="color: #ff4d4d;">' + fwVersion + '</span>';
+      });
+    }
+  } else {
+    if (ac) {
+      ac.addEventListener("updateready", function () {
+        try { ac.swapCache(); } catch (e) {}
+        if (cacheInfo) cacheInfo.textContent = "Cache updated -- reopen browser on next boot";
+      }, false);
+      if (cacheInfo) cacheInfo.textContent = navigator.onLine ? "Offline Cache Ready (PS4 " + fwVersion + ")" : "Running Offline from Cache (PS4 " + fwVersion + ")";
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+      executeForFw(fwNum);
+    });
+  }
+}
 </script>
 </body>
 </html>

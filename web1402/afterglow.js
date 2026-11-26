@@ -48,14 +48,6 @@ const S = {
    written once. The 13.52 column was derived from the two kernel images
    offline and cross-checked against a second method per value. */
 const FIRMWARE = {
-  "14.02": {
-    anchor:    0xE6C30,   /* the lock the leak hands us */
-    swap_rbp:  0xa81478,   /* xchg rbp,rax ; ret */
-    prison0:   0x111fa18,   /* holds a pointer to prison0, so read it */
-    rootvnode: 0x2136e90,
-    padding:   0xB3A298,   /* start of the zero run behind kernel text */
-    ghKmem:    0x466920,
-  },
   "14.00": {
     anchor:    0x00e6c60,   /* the lock the leak hands us */
     swap_rbp:  0x0a80f68,   /* xchg rbp,rax ; ret */
@@ -71,6 +63,80 @@ const FIRMWARE = {
     rootvnode: 0x2136e90,
     padding:   0x0b39ad8,
     ghKmem:    0x0466290,
+  },
+
+  /* 13.00 through 13.50 are confirmed on hardware. */
+  "13.00": {
+    anchor:    0x00e6c20,
+    swap_rbp:  0x0a803c8,
+    prison0:   0x111fa18,
+    rootvnode: 0x2136e90,
+    padding:   0x0b39218,
+    ghKmem:    0x0465a40,
+  },
+  "13.02": {
+    anchor:    0x00e6c20,
+    swap_rbp:  0x0a803c8,
+    prison0:   0x111fa18,
+    rootvnode: 0x2136e90,
+    padding:   0x0b39218,
+    ghKmem:    0x0465a50,
+  },
+  "13.04": {
+    anchor:    0x00e6c20,
+    swap_rbp:  0x0a803c8,
+    prison0:   0x111fa18,
+    rootvnode: 0x2136e90,
+    padding:   0x0b39218,
+    ghKmem:    0x0465a50,
+  },
+  "13.50": {
+    anchor:    0x00e6c20,
+    swap_rbp:  0x0a80838,
+    prison0:   0x111fa18,
+    rootvnode: 0x2136e90,
+    padding:   0x0b39658,
+    ghKmem:    0x0465e90,
+  },
+  "14.02": {
+    anchor:    0x00e6c30,   /* -0x30 from 14.00 -- the one that moves backwards */
+    swap_rbp:  0x0a81478,
+    prison0:   0x111fa18,
+    rootvnode: 0x2136e90,
+    padding:   0x0b3a298,
+    ghKmem:    0x0466920,
+  },
+  "12.00": {
+    anchor:    0x00e6c20,
+    swap_rbp:  0x0a80188,
+    prison0:   0x111fa18,
+    rootvnode: 0x2136e90,
+    padding:   0x0b38fd8,
+    ghKmem:    0x04659e0,
+  },
+  "12.02": {
+    anchor:    0x00e6c20,
+    swap_rbp:  0x0a80188,
+    prison0:   0x111fa18,
+    rootvnode: 0x2136e90,
+    padding:   0x0b38fd8,
+    ghKmem:    0x04659e0,
+  },
+  "12.50": {
+    anchor:    0x00e6c20,
+    swap_rbp:  0x0a80248,
+    prison0:   0x111fa18,
+    rootvnode: 0x2136e90,
+    padding:   0x0b39098,
+    ghKmem:    0x0465a20,
+  },
+  "12.52": {
+    anchor:    0x00e6c20,
+    swap_rbp:  0x0a80248,
+    prison0:   0x111fa18,
+    rootvnode: 0x2136e90,
+    padding:   0x0b39098,
+    ghKmem:    0x0465a20,
   },
 };
 
@@ -120,8 +186,6 @@ const PROBE_NODES = ["/dev/rng", "/dev/urandom", "/dev/random", "/dev/zero", "/d
    is one blob per firmware. Between 13.52 and 14.00 exactly two of its ten
    write targets moved -- the two 0x33 -> 0x37 immediates. */
 const BOOTSTRAP_TABLE = {
-  "14.02":
-    "b9820000c00f3248c1e22089c04809c2488d8a40feffff0f20c04825fffffeff0f22c0b8eb040000beeb040000bf90e9ffff41b8eb000000668981637c1b00b8eb04000041b9eb00000041baeb000000668981bcce2f0041bbeb000000b890e9ffff4881c21ba17c006689b1737c1b006689b9937c1b0066448981048b6200c681cd0a0000ebc6819dda2b00ebc681e1da2b00ebc6815ddb2b00ebc681a1db2b00ebc6814ddd2b00ebc681fde12b00ebc681cde22b00eb66448989ef936200c7819004000000000000c681c2040000eb66448991b904000066448999b5040000c68136233900eb66898124771b00c781d87c1b0090e93c01c78190e73b004831c0c3c681daae1f0037c681ddae1f0037c781802d100102000000488991882d1001c781ac2d1001010000000f20c0480d000001000f22c031c0c3",
   "14.00":
       "b9820000c00f3248c1e22089c04809c2488d8a40feffff0f20c04825fffffeff"
     + "0f22c0c781900400000000000066c781b5040000eb0066c781b9040000eb00c6"
@@ -133,6 +197,60 @@ const BOOTSTRAP_TABLE = {
     + "0f22c0c781900400000000000066c781b5040000eb0066c781b9040000eb00c6"
     + "81c2040000eb66c781b40a0000ff26488d91b40a0000c781802d100102000000"
     + "488991882d1001c781ac2d100101000000c6813aa81f0037c6813da81f00370f"
+    + "20c0480d000001000f22c031c0c3",
+  "13.00":
+    "b9820000c00f3248c1e22089c04809c2488d8a40feffff0f20c04825fffffeff"
+    + "0f22c0c781900400000000000066c781b5040000eb0066c781b9040000eb00c6"
+    + "81c2040000eb66c781b40a0000ff26488d91b40a0000c781802d100102000000"
+    + "488991882d1001c781ac2d100101000000c6817aa71f0037c6817da71f00370f"
+    + "20c0480d000001000f22c031c0c3",
+  "13.02":
+    "b9820000c00f3248c1e22089c04809c2488d8a40feffff0f20c04825fffffeff"
+    + "0f22c0c781900400000000000066c781b5040000eb0066c781b9040000eb00c6"
+    + "81c2040000eb66c781b40a0000ff26488d91b40a0000c781802d100102000000"
+    + "488991882d1001c781ac2d100101000000c6818aa71f0037c6818da71f00370f"
+    + "20c0480d000001000f22c031c0c3",
+  "13.04":
+    "b9820000c00f3248c1e22089c04809c2488d8a40feffff0f20c04825fffffeff"
+    + "0f22c0c781900400000000000066c781b5040000eb0066c781b9040000eb00c6"
+    + "81c2040000eb66c781b40a0000ff26488d91b40a0000c781802d100102000000"
+    + "488991882d1001c781ac2d100101000000c6818aa71f0037c6818da71f00370f"
+    + "20c0480d000001000f22c031c0c3",
+  "13.50":
+    "b9820000c00f3248c1e22089c04809c2488d8a40feffff0f20c04825fffffeff"
+    + "0f22c0c781900400000000000066c781b5040000eb0066c781b9040000eb00c6"
+    + "81c2040000eb66c781b40a0000ff26488d91b40a0000c781802d100102000000"
+    + "488991882d1001c781ac2d100101000000c6819aa71f0037c6819da71f00370f"
+    + "20c0480d000001000f22c031c0c3",
+  "14.02":
+    "b9820000c00f3248c1e22089c04809c2488d8a40feffff0f20c04825fffffeff"
+    + "0f22c0c781900400000000000066c781b5040000eb0066c781b9040000eb00c6"
+    + "81c2040000eb66c781b40a0000ff26488d91b40a0000c781802d100102000000"
+    + "488991882d1001c781ac2d100101000000c681daae1f0037c681ddae1f00370f"
+    + "20c0480d000001000f22c031c0c3",
+  "12.00":
+    "b9820000c00f3248c1e22089c04809c2488d8a40feffff0f20c04825fffffeff"
+    + "0f22c0c781900400000000000066c781b5040000eb0066c781b9040000eb00c6"
+    + "81c2040000eb66c781b40a0000ff26488d91b40a0000c781802d100102000000"
+    + "488991882d1001c781ac2d100101000000c6811aa71f0037c6811da71f00370f"
+    + "20c0480d000001000f22c031c0c3",
+  "12.02":
+    "b9820000c00f3248c1e22089c04809c2488d8a40feffff0f20c04825fffffeff"
+    + "0f22c0c781900400000000000066c781b5040000eb0066c781b9040000eb00c6"
+    + "81c2040000eb66c781b40a0000ff26488d91b40a0000c781802d100102000000"
+    + "488991882d1001c781ac2d100101000000c6811aa71f0037c6811da71f00370f"
+    + "20c0480d000001000f22c031c0c3",
+  "12.50":
+    "b9820000c00f3248c1e22089c04809c2488d8a40feffff0f20c04825fffffeff"
+    + "0f22c0c781900400000000000066c781b5040000eb0066c781b9040000eb00c6"
+    + "81c2040000eb66c781b40a0000ff26488d91b40a0000c781802d100102000000"
+    + "488991882d1001c781ac2d100101000000c6815aa71f0037c6815da71f00370f"
+    + "20c0480d000001000f22c031c0c3",
+  "12.52":
+    "b9820000c00f3248c1e22089c04809c2488d8a40feffff0f20c04825fffffeff"
+    + "0f22c0c781900400000000000066c781b5040000eb0066c781b9040000eb00c6"
+    + "81c2040000eb66c781b40a0000ff26488d91b40a0000c781802d100102000000"
+    + "488991882d1001c781ac2d100101000000c6815aa71f0037c6815da71f00370f"
     + "20c0480d000001000f22c031c0c3",
 };
 
@@ -156,23 +274,6 @@ function setFirmware(fw) {
 }
 
 const PATCH_TABLE = {
-  "14.02": [
-  [0x0000acd,"eb",       "bcopy"],
-  [0x2BDA9D, "eb",       "bzero"],
-  [0x2BDAE1, "eb",       "pagezero"],
-  [0x2BDB5D, "eb",       "memcpy"],
-  [0x2BDBA1, "eb",       "pagecopy"],
-  [0x2BDD4D, "eb",       "copyin"],
-  [0x2BE1FD, "eb",       "copyinstr"],
-  [0x2BE2CD, "eb",       "copystr"],
-  [0x1B7C63, "eb04",     "dlsym, first check"],
-  [0x1B7C73, "eb04",     "dlsym, second check"],
-  [0x1B7C93, "90e9",     "dlsym, nop and jump"],
-  [0x1B7724, "90e9",     "load_prx"],
-  [0x1B7CD8, "90e93c01", "dlsym, open it to every caller"],
-  [0x628B04, "eb00",     "self verification"],
-  [0x6293EF, "eb00",     "delayed panic on suspend"],
-  ],
   "14.00": [
   [0x0000acd, "eb",       "bcopy"],
   [0x02bd79d, "eb",       "bzero"],
@@ -206,6 +307,159 @@ const PATCH_TABLE = {
   [0x01b7818, "90e93c01", "dlsym, open it to every caller"],
   [0x06283c4, "eb00",     "self verification"],
   [0x0628caf, "eb00",     "delayed panic on suspend"],
+  ],
+  "13.00": [
+  [0x0000acd, "eb",        "bcopy"],
+  [0x02bd42d, "eb",        "bzero"],
+  [0x02bd471, "eb",        "pagezero"],
+  [0x02bd4ed, "eb",        "memcpy"],
+  [0x02bd531, "eb",        "pagecopy"],
+  [0x02bd6dd, "eb",        "copyin"],
+  [0x02bdb8d, "eb",        "copyinstr"],
+  [0x02bdc5d, "eb",        "copystr"],
+  [0x01b76e3, "eb04",      "dlsym, first check"],
+  [0x01b76f3, "eb04",      "dlsym, second check"],
+  [0x01b7713, "90e9",      "dlsym, nop and jump"],
+  [0x01b71a4, "90e9",      "load_prx"],
+  [0x01b7758, "90e93c01",  "dlsym, open it to every caller"],
+  [0x0627b84, "eb00",      "self verification"],
+  [0x062846f, "eb00",      "delayed panic on suspend"],
+  ],
+  "13.02": [
+  [0x0000acd, "eb",        "bcopy"],
+  [0x02bd43d, "eb",        "bzero"],
+  [0x02bd481, "eb",        "pagezero"],
+  [0x02bd4fd, "eb",        "memcpy"],
+  [0x02bd541, "eb",        "pagecopy"],
+  [0x02bd6ed, "eb",        "copyin"],
+  [0x02bdb9d, "eb",        "copyinstr"],
+  [0x02bdc6d, "eb",        "copystr"],
+  [0x01b76f3, "eb04",      "dlsym, first check"],
+  [0x01b7703, "eb04",      "dlsym, second check"],
+  [0x01b7723, "90e9",      "dlsym, nop and jump"],
+  [0x01b71b4, "90e9",      "load_prx"],
+  [0x01b7768, "90e93c01",  "dlsym, open it to every caller"],
+  [0x0627b84, "eb00",      "self verification"],
+  [0x062846f, "eb00",      "delayed panic on suspend"],
+  ],
+  "13.04": [
+  [0x0000acd, "eb",        "bcopy"],
+  [0x02bd43d, "eb",        "bzero"],
+  [0x02bd481, "eb",        "pagezero"],
+  [0x02bd4fd, "eb",        "memcpy"],
+  [0x02bd541, "eb",        "pagecopy"],
+  [0x02bd6ed, "eb",        "copyin"],
+  [0x02bdb9d, "eb",        "copyinstr"],
+  [0x02bdc6d, "eb",        "copystr"],
+  [0x01b76f3, "eb04",      "dlsym, first check"],
+  [0x01b7703, "eb04",      "dlsym, second check"],
+  [0x01b7723, "90e9",      "dlsym, nop and jump"],
+  [0x01b71b4, "90e9",      "load_prx"],
+  [0x01b7768, "90e93c01",  "dlsym, open it to every caller"],
+  [0x0627b84, "eb00",      "self verification"],
+  [0x062846f, "eb00",      "delayed panic on suspend"],
+  ],
+  "13.50": [
+  [0x0000acd, "eb",        "bcopy"],
+  [0x02bd44d, "eb",        "bzero"],
+  [0x02bd491, "eb",        "pagezero"],
+  [0x02bd50d, "eb",        "memcpy"],
+  [0x02bd551, "eb",        "pagecopy"],
+  [0x02bd6fd, "eb",        "copyin"],
+  [0x02bdbad, "eb",        "copyinstr"],
+  [0x02bdc7d, "eb",        "copystr"],
+  [0x01b7703, "eb04",      "dlsym, first check"],
+  [0x01b7713, "eb04",      "dlsym, second check"],
+  [0x01b7733, "90e9",      "dlsym, nop and jump"],
+  [0x01b71c4, "90e9",      "load_prx"],
+  [0x01b7778, "90e93c01",  "dlsym, open it to every caller"],
+  [0x0627fc4, "eb00",      "self verification"],
+  [0x06288af, "eb00",      "delayed panic on suspend"],
+  ],
+  "14.02": [
+  [0x0000acd, "eb",        "bcopy"],
+  [0x02bda9d, "eb",        "bzero"],
+  [0x02bdae1, "eb",        "pagezero"],
+  [0x02bdb5d, "eb",        "memcpy"],
+  [0x02bdba1, "eb",        "pagecopy"],
+  [0x02bdd4d, "eb",        "copyin"],
+  [0x02be1fd, "eb",        "copyinstr"],
+  [0x02be2cd, "eb",        "copystr"],
+  [0x01b7c63, "eb04",      "dlsym, first check"],
+  [0x01b7c73, "eb04",      "dlsym, second check"],
+  [0x01b7c93, "90e9",      "dlsym, nop and jump"],
+  [0x01b7724, "90e9",      "load_prx"],
+  [0x01b7cd8, "90e93c01",  "dlsym, open it to every caller"],
+  [0x0628b04, "eb00",      "self verification"],
+  [0x06293ef, "eb00",      "delayed panic on suspend"],
+  ],
+  "12.00": [
+  [0x0000acd, "eb",        "bcopy"],
+  [0x02bd3cd, "eb",        "bzero"],
+  [0x02bd411, "eb",        "pagezero"],
+  [0x02bd48d, "eb",        "memcpy"],
+  [0x02bd4d1, "eb",        "pagecopy"],
+  [0x02bd67d, "eb",        "copyin"],
+  [0x02bdb2d, "eb",        "copyinstr"],
+  [0x02bdbfd, "eb",        "copystr"],
+  [0x01b76a3, "eb04",      "dlsym, first check"],
+  [0x01b76b3, "eb04",      "dlsym, second check"],
+  [0x01b76d3, "90e9",      "dlsym, nop and jump"],
+  [0x01b7164, "90e9",      "load_prx"],
+  [0x01b7718, "90e93c01",  "dlsym, open it to every caller"],
+  [0x0627af4, "eb00",      "self verification"],
+  [0x06283df, "eb00",      "delayed panic on suspend"],
+  ],
+  "12.02": [
+  [0x0000acd, "eb",        "bcopy"],
+  [0x02bd3cd, "eb",        "bzero"],
+  [0x02bd411, "eb",        "pagezero"],
+  [0x02bd48d, "eb",        "memcpy"],
+  [0x02bd4d1, "eb",        "pagecopy"],
+  [0x02bd67d, "eb",        "copyin"],
+  [0x02bdb2d, "eb",        "copyinstr"],
+  [0x02bdbfd, "eb",        "copystr"],
+  [0x01b76a3, "eb04",      "dlsym, first check"],
+  [0x01b76b3, "eb04",      "dlsym, second check"],
+  [0x01b76d3, "90e9",      "dlsym, nop and jump"],
+  [0x01b7164, "90e9",      "load_prx"],
+  [0x01b7718, "90e93c01",  "dlsym, open it to every caller"],
+  [0x0627af4, "eb00",      "self verification"],
+  [0x06283df, "eb00",      "delayed panic on suspend"],
+  ],
+  "12.50": [
+  [0x0000acd, "eb",        "bcopy"],
+  [0x02bd40d, "eb",        "bzero"],
+  [0x02bd451, "eb",        "pagezero"],
+  [0x02bd4cd, "eb",        "memcpy"],
+  [0x02bd511, "eb",        "pagecopy"],
+  [0x02bd6bd, "eb",        "copyin"],
+  [0x02bdb6d, "eb",        "copyinstr"],
+  [0x02bdc3d, "eb",        "copystr"],
+  [0x01b76e3, "eb04",      "dlsym, first check"],
+  [0x01b76f3, "eb04",      "dlsym, second check"],
+  [0x01b7713, "90e9",      "dlsym, nop and jump"],
+  [0x01b71a4, "90e9",      "load_prx"],
+  [0x01b7758, "90e93c01",  "dlsym, open it to every caller"],
+  [0x0627b34, "eb00",      "self verification"],
+  [0x062841f, "eb00",      "delayed panic on suspend"],
+  ],
+  "12.52": [
+  [0x0000acd, "eb",        "bcopy"],
+  [0x02bd40d, "eb",        "bzero"],
+  [0x02bd451, "eb",        "pagezero"],
+  [0x02bd4cd, "eb",        "memcpy"],
+  [0x02bd511, "eb",        "pagecopy"],
+  [0x02bd6bd, "eb",        "copyin"],
+  [0x02bdb6d, "eb",        "copyinstr"],
+  [0x02bdc3d, "eb",        "copystr"],
+  [0x01b76e3, "eb04",      "dlsym, first check"],
+  [0x01b76f3, "eb04",      "dlsym, second check"],
+  [0x01b7713, "90e9",      "dlsym, nop and jump"],
+  [0x01b71a4, "90e9",      "load_prx"],
+  [0x01b7758, "90e93c01",  "dlsym, open it to every caller"],
+  [0x0627b34, "eb00",      "self verification"],
+  [0x062841f, "eb00",      "delayed panic on suspend"],
   ],
 };
 
@@ -850,63 +1104,110 @@ function pinCore() {
   let rv = sc(S.cpuset_getaffinity, 3, 1, -1, 16, mask.at).i32;
   if (rv !== 0) return { ok: false, note: "getaffinity rv=" + rv };
 
-  let core = -1, allowed = [];
+  const allowed = [];
   for (let b = 0; b < 128; b++) {
-    if ((mask.u8[b >> 3] >> (b & 7)) & 1) { if (core < 0) core = b; allowed.push(b); }
+    if ((mask.u8[b >> 3] >> (b & 7)) & 1) allowed.push(b);
   }
-  if (core < 0) return { ok: false, note: "no core in the mask" };
+  if (!allowed.length) return { ok: false, note: "no core in the mask" };
 
-  mask.u8.fill(0);
-  mask.u8[core >> 3] = 1 << (core & 7);
-  rv = sc(S.cpuset_setaffinity, 3, 1, -1, 16, mask.at).i32;
-  return { ok: rv === 0, core: core, allowed: allowed.join(","), note: "setaffinity rv=" + rv };
+  /* Every allowed core in turn, not just the lowest. On 04.11. setaffinity
+     answered -1 although [6,7] were allowed, and the run gave up without
+     ever having tried 7. Which core it ends up on does not matter -- all
+     that is needed is that the free and the refill land on the same one. */
+  const versuche = [];
+  for (let i = 0; i < allowed.length; i++) {
+    const core = allowed[i];
+    mask.u8.fill(0);
+    mask.u8[core >> 3] = 1 << (core & 7);
+    rv = sc(S.cpuset_setaffinity, 3, 1, -1, 16, mask.at).i32;
+    versuche.push(core + ":rv" + rv);
+    if (rv === 0) {
+      return {
+        ok: true, core: core, allowed: allowed.join(","),
+        note: versuche.length > 1
+          ? "setaffinity ok after " + versuche.join(" ")
+          : "setaffinity rv=0",
+      };
+    }
+  }
+  return {
+    ok: false, allowed: allowed.join(","),
+    note: "every allowed core refused: " + versuche.join(" "),
+  };
 }
 
 /* ------------------------------------------------------- the payload */
 
 /* Fetch a file once. Both loaders are handed the bytes, so deciding the
    format does not cost a second request. */
-async function fetchBytes(url, tag) {
+/* `ms` bounds the wait. Without one, probing for a file that may or may not
+   be there costs whatever the network decides -- with no route that was
+   20-30 s on a console, and the run stands still meanwhile. What is allowed
+   to fail must be allowed to fail FAST. Only probes get a bound; the payload
+   itself waits as long as it takes, because for it there is no
+   Rueckfall. */
+async function fetchBytes(url, tag, ms) {
+  let ctl = null, timer = null;
   try {
-    const r = await fetch(url);
+    if (ms && typeof AbortController === "function") {
+      ctl = new AbortController();
+      timer = setTimeout(function () { try { ctl.abort(); } catch (e) {} }, ms);
+    }
+    const r = await fetch(url, ctl ? { signal: ctl.signal } : undefined);
     if (!r.ok) { say("[" + tag + "] " + url + " HTTP " + r.status); return null; }
     return new Uint8Array(await r.arrayBuffer());
   } catch (e) {
-    say("[" + tag + "] " + url + " unreachable: " + (e && e.message));
+    const ab = e && (e.name === "AbortError" || /abort/i.test(e.message || ""));
+    say("[" + tag + "] " + url + (ab ? " not there within " + ms + " ms"
+                                     : " unreachable: " + (e && e.message)));
     return null;
+  } finally {
+    if (timer !== null) clearTimeout(timer);
   }
 }
 
-/* The kernel patch set. It belongs to GOLDHEN, not to the composite
-   image: the blob writes 57 kernel text sites, of which afterglow covers 25 --
-   fifteen from PATCHES and ten more from BOOTSTRAP. The remaining 32 are
-   exactly what GoldHEN's own code expects to find: a block of 29 from
-   0x125791 to 0x125871, plus 0x2fcb5c, 0x391fc6 and 0x3be3c0.
-
-   It runs for both image forms. A raw payload that started without it brought
-   GoldHEN up (FTP answered) but left it running without its patches. */
-async function runPatchSet(room) {
+/* Firmware bin (1400.bin, 1402.bin, 1300.bin, ...) applied before GoldHEN. */
+async function applyFwBin(room) {
   const c = host();
+  if (STATE.ctx && STATE.ctx.params && STATE.ctx.params.get("fwbin") === "0") {
+    say("[g] [0] fw bin skipped on request");
+    return true;
+  }
   let pset = null;
-  try {
-    /* One set per firmware. The blob writes fixed kernel addresses -- 57 of
-       them on 14.00 -- so the wrong one does not merely fail, it writes into
-       a kernel that has those addresses somewhere else. */
-    const r2 = await fetch("./src/kpatches/" + FW_KEY.replace(".", "") + ".bin");
-    if (r2.ok) pset = new Uint8Array(await r2.arrayBuffer());
-  } catch (e) {}
+  {
+    const fwBin = FW_KEY.replace(".", "") + ".bin";
+    const candidates = [
+      "slopkit/patches/" + fwBin,
+      "patches/" + fwBin,
+      "kpatches/" + fwBin,
+      "src/kpatches/" + fwBin,
+    ];
+    for (let i = 0; i < candidates.length && !pset; i++) {
+      try {
+        const r2 = await fetch(candidates[i]);
+        if (r2.ok) {
+          pset = new Uint8Array(await r2.arrayBuffer());
+          if (pset && pset.length) {
+            say("[g] loaded " + candidates[i]);
+            break;
+          }
+          pset = null;
+        }
+      } catch (e) {}
+    }
+  }
   if (!pset || !pset.length) {
-    say("[g] no patch set for firmware " + FW_KEY
+    say("[g] no " + FW_KEY.replace(".", "") + ".bin for firmware " + FW_KEY
         + " -- GoldHEN will not be started without it");
     return false;
   }
   if (pset.length > 0x400 - 0xc0) {
-    say("[g] the patch set does not fit in the body area");
+    say("[g] " + FW_KEY.replace(".", "") + ".bin does not fit in the body area");
     return false;
   }
   wrbuf(plus(room, 0xc0), pset);
   const pr = c.callAddr(plus(room, GATE), [11, plus(room, 0xc0)]);
-  say("[g] [0] kernel patch set, " + pset.length + " bytes from the libc tail -> 0x"
+  say("[g] [0] " + FW_KEY.replace(".", "") + ".bin, " + pset.length + " bytes -> 0x"
       + ((pr && pr.lo >>> 0) || 0).toString(16));
   return true;
 }
@@ -918,9 +1219,8 @@ async function runPatchSet(room) {
        padding RW.
      - raw payload: begins with `e9` (jmp rel32), like hen.bin. Mapped and
        started as a thread.
-   A GoldHEN build of 297,496 bytes is the second form; going by its name it
-   would have taken the composite path and been rejected by the length
-   check. */
+   A GoldHEN loader is the second form; going by its name it would have taken
+   the composite path and been rejected by the length check. */
 async function loadEnabler(url, k, kbase, room) {
   const blob = await fetchBytes(url, "e");
   if (blob === null) return false;
@@ -928,10 +1228,10 @@ async function loadEnabler(url, k, kbase, room) {
     say("[e] " + blob.length + " bytes -- composite image, patch chain path");
     return loadGoldhen(url, k, kbase, room, blob);
   }
-  if (blob.length) {
+  if (blob.length && blob[0] === 0xe9) {
     say("[e] " + blob.length + " bytes, leading jmp -- raw payload path");
     // Here too: GoldHEN expects to find its patches in place.
-    if (!(await runPatchSet(room))) return false;
+    if (!(await applyFwBin(room))) return false;
     return loadPayload(url, blob);
   }
   say("[e] " + blob.length + " bytes: neither the composite image ("
@@ -957,6 +1257,10 @@ async function loadPayload(url, preloaded) {
   }
 
   if (!blob.length) { say("[p] " + url + " is empty"); return false; }
+  if (blob[0] !== 0xe9) {
+    say("[p] " + url + " does not start with a jmp -- not a raw payload, refusing");
+    return false;
+  }
 
   const size = (blob.length + 0x3fff) & ~0x3fff;
   const m = sc(S.mmap, 0, size, 7, 0x1002, -1, 0);
@@ -1216,8 +1520,7 @@ async function loadGoldhen(url, k, kbase, room, preloaded) {
     return [rd4(plus(buf, GH.mark + s2 * 8)), rd4(plus(buf, GH.mark + s2 * 8 + 4))];
   };
 
-  /* GoldHEN's own patch set, which is not afterglow's -- runPatchSet above
-     says what the difference is. The blob is position independent, takes no
+  /* The padding write is the difference. The blob is position independent, takes no
      arguments, fetches the kernel base through rdmsr and ends in ret, so it
      only has to sit somewhere ring 0 may run from.
 
@@ -1228,7 +1531,7 @@ async function loadGoldhen(url, k, kbase, room, preloaded) {
      other; executability is per page, measured at one page in eighteen. The
      set fits in the body area, +0xc0 to +0x400, and afterglow rebuilds that
      body on its next use. */
-  if (!(await runPatchSet(room))) return false;
+  if (!(await applyFwBin(room))) return false;
 
   /* The Lua chain calls 0x144d and 0xce9 here. Their job is to work out the
      kernel base and leave it at +0x47b20, which step 4 then reads back -- we
@@ -1662,13 +1965,6 @@ async function attempt(ctx, opts) {
     if (m0.i32 !== -1 && sc(S.mprotect, v(m0.lo, m0.hi), 0x4000, 7).i32 === 0) {
       say("  this kernel is already open -- a run has succeeded on this boot.");
       say("  Not firing again; reboot the console for a fresh one.");
-
-      // load payload
-      const payload_path = sessionStorage.getItem("payload_path");
-      const blob = await fetchBytes(payload_path, "p");
-      await loadPayload(payload_path, blob)
-      say("  Payload loaded successfully!");
-      window.jailbreakSuccess();
       return false;
     }
   }
@@ -2107,26 +2403,19 @@ async function attempt(ctx, opts) {
       ? "handles defused -- this page may close"
       : "the handles are NOT defused -- do not let this page close");
 
-const want = (ctx.params && ctx.params.get("payload"))
-          || (typeof sessionStorage !== "undefined" ? sessionStorage.getItem("payload_path") : null)
-          || null;  const mode = (ctx.params && ctx.params.get("mode")) || "";
-  if (want) {
-    const blob = await fetchBytes(want, "p");
-    if (blob) {
-      if (blob.length === GH.nlOff + GH.nlLen) {
-        iface.payload = await loadGoldhen(want, k, kbase, hostFree, blob);
-      } else {
-        iface.payload = await loadPayload(want, blob);
-        // say("[p] " + want + " is neither");
-      }
-    }
+  /* Default GoldHEN only. Binary sits next to index.html. */
+  const want = (ctx.params && ctx.params.get("payload")) || "goldhen_2.4b18.14.bin";
+  const mode = (ctx.params && ctx.params.get("mode")) || "goldhen";
+  if (want !== "0" && want !== "") {
+    iface.payload = (mode === "goldhen")
+      ? await loadEnabler(want, k, kbase, hostFree)
+      : await loadPayload(want);
   }
-
   say("done -- jailbroken, rwx open, syscall 11 is a kexec gate"
       + (iface.payload ? ", enabler running" : ""));
-    window.jailbreakSuccess();
   return iface;
 }
+
 /* An attempt that fell short leaves its handles live, and those are only
    defused once step 10 is reached -- so stopping on a recoverable miss is the
    worst of both: nothing gained, and a process that hangs when the page goes

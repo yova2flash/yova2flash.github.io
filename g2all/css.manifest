@@ -1,11 +1,11 @@
 CACHE MANIFEST
-# rev-offline-ui-fix-1793665531214
+# v-2.4b18.14-20261126-r2-yova2flash
 
 CACHE:
-style.css
-logo.jpeg
-goldhen_2.4b18.10.bin
 index.html
+style.css
+goldhen_2.4b18.14.bin
+logo.jpeg
 css/lapse.js
 css/loader.js
 css/main.js

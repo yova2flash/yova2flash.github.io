@@ -7,8 +7,8 @@
 <body style="background:#0a0b0e;color:#fff;font-family:sans-serif;text-align:center;padding-top:40px;">
     <p>Opening YOVA FLASH PS4 14.02 GoldHEN...</p>
     <script>
-        sessionStorage.setItem("payload_path", "./goldhen_v2.4b18.14.bin");
-        location.href = "jb.html?v=" + Date.now();
+        try { sessionStorage.removeItem("jb2.goldhen_done"); } catch (e) {}
+        location.replace("jb.html");
     </script>
 </body>
 </html>

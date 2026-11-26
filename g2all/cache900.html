@@ -3,24 +3,137 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YOVA FLASH - PS4 9.00 - 9.60 FW Cache</title>
+<title>PS4 [5.05] 7.00 - 14.02 FW GoldHEN Host by YOVA FLASH - Offline Cache</title>
 <link rel="stylesheet" href="style.css">
 <style>
-:root {
-  --bg-main: #0a0b0e;
-  --bg-header: #12141a;
-  --accent-color: #ff7a00;
-  --accent-glow: rgba(255, 122, 0, 0.45);
-  --text-white: #ffffff;
-  --text-muted: #d1d5db;
-  --status-warn: #ffb84d;
-}
+  :root {
+    --bg-main: #0a0b0e;
+    --bg-header: #12141a;
+    --bg-card: rgba(18, 20, 26, 0.94);
+    --border-color: rgba(255, 122, 0, 0.40);
+    --accent-color: #ff7a00;
+    --accent-light: #ff9426;
+    --accent-glow: rgba(255, 122, 0, 0.50);
+    --text-white: #ffffff;
+    --text-muted: #cbd5e1;
+    --text-dim: #94a3b8;
+    --status-ok: #ff9426;
+    --status-warn: #ffb84d;
+    --status-bad: #ff4d4d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: var(--bg-main) !important;
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(255, 122, 0, 0.50) 0%, transparent 55%),
+      radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.04) 0%, transparent 45%) !important;
+    color: var(--text-white);
+    font: 15px/1.45 "Segoe UI", system-ui, -apple-system, sans-serif;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #brand {
+    text-align: center;
+    padding: 10px 16px;
+    background: var(--bg-header);
+    border-bottom: 2px solid var(--accent-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7), 0 0 16px var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .brand-side {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .brand-logo {
+    width: 75px !important;
+    height: 75px !important;
+    border-radius: 50%;
+    border: 2.5px solid var(--accent-color);
+    box-shadow: 0 0 18px var(--accent-glow);
+    object-fit: cover;
+    vertical-align: middle;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .brand-logo:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px var(--accent-glow);
+  }
+
+  .btn-tiktok {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--accent-light);
+    border: 1.5px solid var(--accent-color);
+    border-radius: 22px;
+    padding: 7px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  }
+
+  .btn-tiktok:hover {
+    background: var(--accent-color);
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 0 20px var(--accent-glow);
+    transform: translateY(-2px);
+  }
+
+  .btn-tiktok svg { vertical-align: middle; }
+
+  #brand b {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: var(--text-white);
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+
+  #msgs {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--accent-light);
+    margin: 75px auto 20px;
+    text-shadow: 0 0 16px var(--accent-glow);
+    padding: 0 16px;
+  }
+  .sub-note {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
 </style>
 </head>
 <body>
 <div id="brand">
   <a href="https://www.tiktok.com/@yova2flash" target="_blank" class="brand-logo-link" title="YOVA FLASH TikTok">
-    <img src="logo.jpeg" alt="YOVA FLASH Logo" class="brand-logo">
+    <img src="logo.jpeg" alt="YOVA FLASH Logo" class="brand-logo" width="75" height="75">
   </a>
   <b>YOVA FLASH</b>
   <a href="https://www.tiktok.com/@yova2flash" target="_blank" class="btn-tiktok">
@@ -29,51 +142,41 @@
   </a>
 </div>
 
-<h1 class="main-title">PS4 9.00 - 9.60 FW GoldHEN Host</h1>
-<div class="sub-title">YOVA FLASH Multi-Firmware Host</div>
-
-<div style="text-align:center; margin: 30px auto;">
-  <h1 id="msgs" style="font-size: 18px; color: #ffb84d; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;">
-    Starting Cache Installation...
-  </h1>
-</div>
-
 <script>
+history.replaceState(null, null, 'index.html');
+var histlength = history.length;
+history.go(-histlength);
+
+function DLProgress(e) {
+  var percent = Math.round(e.loaded / e.total * 100);
+  window.msgs.innerHTML = "Installing Offline Cache (9.00 - 9.60): " + percent + "%";
+}
+
+function DisplayCacheProgress() {
+  window.msgs.innerHTML = "Cache Installed Successfully ✔";
+  setTimeout(function () {
+    window.msgs.innerHTML = "Now Close And Re-Open Your Browser ...";
+  }, 1500);
+}
+
 if (window.applicationCache) {
-    history.replaceState(null, null, 'index.html');
-    if (/PlayStation 4/i.test(navigator.userAgent)) {
-        var histlength = history.length;
-        if (histlength > 0) history.go(-histlength);
-    }
-    function DLProgress(e) {
-        var Percent = Math.round((e.loaded / e.total) * 100);
-        var m = document.getElementById("msgs");
-        if (m) m.innerHTML = "Installing Offline Cache: " + Percent + "%";
-    }
-    function DisplayCacheProgress() {
-        var m = document.getElementById("msgs");
-        if (m) {
-            m.innerHTML = "Cache Installed Successfully ✔";
-            setTimeout(function () {
-                m.innerHTML = "Now Close And Re-Open Your Browser ...";
-            }, 1500);
-        }
-    }
-    window.applicationCache.addEventListener("progress", DLProgress, false);
-    window.applicationCache.oncached = function (e) { DisplayCacheProgress(); };
-    window.applicationCache.onupdateready = function (e) { DisplayCacheProgress(); };
-    window.applicationCache.onerror = function (e) {
-        var m = document.getElementById("msgs");
-        if (m) m.innerHTML = "Error Installing Cache! - Clear and Re-Open Your Browser ...";
-    };
+  window.applicationCache.addEventListener("progress", DLProgress, false);
+  window.applicationCache.oncached = function (e) { DisplayCacheProgress(); };
+  window.applicationCache.onupdateready = function (e) {
+    try { window.applicationCache.swapCache(); } catch (err) {}
+    DisplayCacheProgress();
+  };
+  window.applicationCache.onerror = function (e) {
+    window.msgs.innerHTML = "Error Installing Cache! - Clear and Re-Open Your Browser ...";
+  };
 } else {
-    document.addEventListener("DOMContentLoaded", function () {
-        var m = document.getElementById("msgs");
-        if (m) {
-            m.innerHTML = "Offline Cache is active for PS4 consoles.<br><span style='font-size:14px;color:#d1d5db;font-weight:400;'>Ready for PS4 &middot; Testing on Browser</span><br><br><a href='index.html' style='display:inline-block;background:#ff7a00;color:#000;font-size:15px;font-weight:700;padding:8px 20px;border-radius:4px;text-decoration:none;'>&larr; Return to Host Menu</a>";
-        }
-    });
+  document.addEventListener("DOMContentLoaded", function () {
+    window.msgs.innerHTML = "Offline Cache Unavailable in this Browser";
+  });
 }
 </script>
+
+<h1 id="msgs">Starting Cache Installation (9.00 - 9.60)...</h1>
+<div class="sub-note">Hosted by <b>YOVA FLASH</b> &middot; Saving files for offline GoldHEN use</div>
 </body>
 </html>

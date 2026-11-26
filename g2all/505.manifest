@@ -1,12 +1,12 @@
-CACHE MANIFEST 
-# rev-offline-ui-fix-1793665527715
+CACHE MANIFEST
+# v-2.4b18.14-20261126-r2-yova2flash
 
-CACHE: 
-style.css
-logo.jpeg
-goldhen_2.4b18.10.bin
+CACHE:
 index.html
+style.css
+goldhen_2.4b18.14.bin
+logo.jpeg
 505/exploit.js
 
-NETWORK: 
-* 
+NETWORK:
+*
